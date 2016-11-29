@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:TodoSample"
+             x:Class="TodoSample.Views.TodoPage"
+             Title="Todo">
+  <AbsoluteLayout>
+    <StackLayout AbsoluteLayout.LayoutFlags="All"
+                 AbsoluteLayout.LayoutBounds="0,0,1,1">
+      <SearchBar x:Name="search" 
+                 Placeholder="Search name" 
+                 Text=""/>
+      <ListView x:Name="TodoList"
+                ItemsSource="{Binding}"
+                HasUnevenRows="true">
+        <ListView.ItemTemplate>
+          <DataTemplate>
+            <ViewCell>
+              <StackLayout Orientation="Horizontal"
+                           Padding="8">
+                <StackLayout Padding="8"
+                             HorizontalOptions="FillAndExpand">
+                  <Label Text="{Binding Name}"
+                         FontSize="Large"/>
+                  <Label Text="{Binding Notes, StringFormat='Todo: {0}'}"/>
+                  <Label Text="{Binding Date, StringFormat='Due date: {0:yyyy/MM/dd}'}"/>
+                </StackLayout>
+                <Switch IsToggled="{Binding Done}"
+                        VerticalOptions="Center"/>
+              </StackLayout>
+            </ViewCell>
+          </DataTemplate>
+        </ListView.ItemTemplate>
+      </ListView>
+    </StackLayout>
+    <Button AbsoluteLayout.LayoutFlags="PositionProportional"
+            AbsoluteLayout.LayoutBounds="0.99, 0.99, AutoSize, AutoSize"
+            x:Name="addButton"
+            Text="+"
+            BackgroundColor="#3333dd"
+            TextColor="White"
+            WidthRequest="75"
+            FontSize="50"
+            BorderRadius="35"
+            Scale="0.8"/>
+  </AbsoluteLayout>
+</ContentPage>
