@@ -7,8 +7,8 @@
   <AbsoluteLayout>
     <StackLayout AbsoluteLayout.LayoutFlags="All"
                  AbsoluteLayout.LayoutBounds="0,0,1,1">
-      <SearchBar x:Name="search" 
-                 Placeholder="Search name" 
+      <SearchBar x:Name="search"
+                 Placeholder="Search Todo"
                  Text=""/>
       <ListView x:Name="TodoList"
                 ItemsSource="{Binding}"
@@ -33,6 +33,7 @@
         </ListView.ItemTemplate>
       </ListView>
     </StackLayout>
+    <!-- AndroidのFloatingActionButtonもどき(ButtonのRadiusプロパティはXF2.2あたりで実装されましたが、Androidで正しく動作していません) -->
     <Button AbsoluteLayout.LayoutFlags="PositionProportional"
             AbsoluteLayout.LayoutBounds="0.99, 0.99, AutoSize, AutoSize"
             x:Name="addButton"

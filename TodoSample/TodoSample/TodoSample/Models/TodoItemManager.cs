@@ -45,6 +45,7 @@ namespace TodoSample.Models
 
         public async Task<int> SaveItem(TodoItem item)
         {
+            // コネクションを張り、TodoItemを新規作成(Id==0)でなければUpdateします。
             using (var connection = await CreateConnection())
             {
                 if (item.Id != 0)
@@ -58,6 +59,7 @@ namespace TodoSample.Models
 
         public async Task<int> DeleteItem(int id)
         {
+            // コネクションを張り、Idを指定してDeleteします。
             using (var connection = await CreateConnection())
             {
                 return connection.Delete<TodoItem>(id);

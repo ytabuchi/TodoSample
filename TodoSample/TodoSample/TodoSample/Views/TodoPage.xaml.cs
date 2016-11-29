@@ -24,12 +24,13 @@ namespace TodoSample.Views
 
             this.search.TextChanged += async (sender, e) =>
             {
+                // Searchbarのテキストが変更されるたびに、ObservableCollectionをクリアしてコレクションを再設定。
                 using (var connection = await manager.CreateConnection())
                 {
                     Items.Clear();
                     foreach (var item in (from x in connection.Table<TodoItem>() orderby x.Id select x))
                     {
-                        if (item.Name.Contains(search.Text))
+                        if (item.Notes.Contains(search.Text))
                             Items.Add(item);
                     }
                 }
@@ -37,10 +38,10 @@ namespace TodoSample.Views
 
             this.TodoList.ItemSelected += async (object sender, SelectedItemChangedEventArgs e) =>
             {
+                // 選択されたTodoItemをItemPageの引数で渡す。
                 var item = e.SelectedItem as TodoItem;
                 if (item == null)
                     return;
-
                 await Navigation.PushAsync(new ItemPage(item));
 
                 TodoList.SelectedItem = null;
@@ -56,6 +57,7 @@ namespace TodoSample.Views
         {
             base.OnAppearing();
 
+            // 画面表示時にSQLiteのコネクションを張り、ObservableCollectionを入れ替える。
             using (var connection = await manager.CreateConnection())
             {
                 Items.Clear();

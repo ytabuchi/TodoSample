@@ -18,6 +18,7 @@ namespace TodoSample.Views
         {
             InitializeComponent();
 
+            // TodoPageから受け取ったitemか、Dateのみを今日に指定した_itemを利用。
             if (item != null)
                 _item = item;
             else
@@ -26,8 +27,10 @@ namespace TodoSample.Views
                     Date = DateTime.Now
                 };
 
+            // _itemをバインディング対象に。
             this.BindingContext = _item;
 
+            // ItemPageの情報を格納してTodoItemManager.SaveItemを実行。
             SaveButton.Clicked += async (sender, e) =>
             {
                 var tmpItem = new TodoItem
@@ -42,6 +45,7 @@ namespace TodoSample.Views
                 await Navigation.PopAsync();
             };
 
+            // Idを指定してTodoItemManager.DeleteItemを実行。
             DeleteButton.Clicked += async (sender, e) =>
             {
                 await manager.DeleteItem(_item.Id);
